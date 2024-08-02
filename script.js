@@ -210,6 +210,14 @@
 
         $form[0].reset();
         $form.find('input[id^="produto"][id$="-valor-total"]').val('');
+
+
+        // Inicializar o primeiro produto se nenhum produto existir
+    if ($('.product-item').length === 0) {
+        addProduct(productIndex);
+        productIndex++;
+    }
+    
     });
 
     // Validação antes de salvar
@@ -258,7 +266,7 @@
             anexos: anexos.map(anexo => ({ nome: anexo.nome })) // Não podemos enviar o blob pelo JSON
         };
 
-        // Simular um atraso de envio
+        //loading
         setTimeout(() => {
             $('#loadingModal').modal('hide');
             console.log(JSON.stringify(jsonData, null, 2));
@@ -272,12 +280,8 @@
             URL.revokeObjectURL(a.href);
 
             alert('Fornecedor salvo com sucesso!');
-        }, 2000); // Simula um atraso de 2 segundos
+        }, 2000);
     });
 
-    // Inicializar o primeiro produto se nenhum produto existir
-    if ($('.product-item').length === 0) {
-        addProduct(productIndex);
-        productIndex++;
-    }
+    
 });
