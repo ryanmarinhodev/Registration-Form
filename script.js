@@ -167,7 +167,7 @@
             $(this).val('');
         }
     });
-
+ 
     $(document).on('click', '.btn-remove-product', function() {
         $(this).closest('.product-item').remove();
         const remainingProducts = $('.product-item');
@@ -281,7 +281,5 @@
 
             alert('Fornecedor salvo com sucesso!');
         }, 2000);
-    });
-
-    
+    }); 
 });
