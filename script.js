@@ -227,10 +227,9 @@
             return;
         }
 
-        // Mostrar modal de loading
-        $('#loadingModal').modal('show');
+        
 
-        // Capturar dados do fornecedor e dos produtos
+        // Captura dados do fornecedor e dos produtos
         const fornecedor = {
             razaoSocial: $('#razao-social').val(),
             cnpj: $('#cnpj').val(),
@@ -263,23 +262,24 @@
         const jsonData = {
             fornecedor,
             produtos,
-            anexos: anexos.map(anexo => ({ nome: anexo.nome })) // Não podemos enviar o blob pelo JSON
+            anexos: anexos.map(anexo => ({ nome: anexo.nome }))
         };
 
-        //loading
+        //estado de loading
         setTimeout(() => {
             $('#loadingModal').modal('hide');
             console.log(JSON.stringify(jsonData, null, 2));
 
-            // Para baixar o JSON
+            // baixa o JSON
             const a = document.createElement('a');
             const file = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
             a.href = URL.createObjectURL(file);
             a.download = 'fornecedor_dados.json';
             a.click();
             URL.revokeObjectURL(a.href);
-
             alert('Fornecedor salvo com sucesso!');
         }, 2000);
+        // Mostra modal de loading
+        $('#loadingModal').modal('show');
     }); 
 });
